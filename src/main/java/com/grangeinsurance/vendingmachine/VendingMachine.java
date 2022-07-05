@@ -36,11 +36,11 @@ public class VendingMachine {
 	availableItems.put("Candy", 0.65f);
 	}
 	public Object machineDisplay() {
-		if (currentTotal > 0 && itemSelected == "") {
+		if (currentTotal > 0 && "".equals(itemSelected)) {
 			return String.format(priceFormat, currentTotal);
-		} else if (priceOfItem > currentTotal && itemSelected != "") {
+		} else if (priceOfItem > currentTotal && !"".equals(itemSelected)) {
 			return "PRICE " + String.format(priceFormat, priceOfItem);
-		} else if (priceOfItem <= currentTotal && itemSelected != "") {
+		} else if (priceOfItem <= currentTotal && !"".equals(itemSelected)) {
 			currentTotal -= priceOfItem;
 			itemsInTray.add(itemSelected);
 			return "THANK YOU";
