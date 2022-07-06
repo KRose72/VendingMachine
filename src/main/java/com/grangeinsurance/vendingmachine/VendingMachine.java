@@ -38,19 +38,38 @@ public class VendingMachine {
 	public Object machineDisplay() {
 		if (currentTotal > 0 && "".equals(itemSelected)) {
 			return String.format(priceFormat, currentTotal);
-		} else if (priceOfItem > currentTotal && !"".equals(itemSelected)) {
+		} 
+		else if (priceOfItem > currentTotal && !"".equals(itemSelected)) 
+		{
 			return "PRICE " + String.format(priceFormat, priceOfItem);
-		} else if (priceOfItem <= currentTotal && !"".equals(itemSelected)) {
-			currentTotal -= priceOfItem;
+		} 
+		else if (priceOfItem == currentTotal && !"".equals(itemSelected)) 
+		{
+			currentTotal = 0;
 			itemsInTray.add(itemSelected);
 			return "THANK YOU";
-		} else {
+		} 
+		else if (priceOfItem < currentTotal && !"".equals(itemSelected)) 
+		{
+			currentTotal -= priceOfItem;
+			itemsInTray.add(itemSelected);
+			if (currentTotal > 0) {
+				makeChange(currentTotal);
+			}
+			return "THANK YOU";
+		}
+		else 
+		{
 			return "INSERT COIN";
 		}
 	}
 	
 	public Object coinReturn() {
 		return returnedCoins.toString().replace("[", "").replace("]", "");
+	}
+	
+	public Object dispenseTray() {
+		return itemsInTray.toString().replace("[", "").replace("]", "");
 	}
 	
 	public void insertCoin (float total) {
@@ -73,8 +92,13 @@ public class VendingMachine {
 		
 	}
 
-	public Object dispenseTray() {
-		return itemsInTray.toString().replace("[", "").replace("]", "");
+	public void makeChange(float total) {
+		while (total != 0) {
+			if (total >= acceptedCoins.get("Quarter")) {
+				total -= acceptedCoins.get("Quarter");
+				returnedCoins.add("Quarter");
+			}
+		}
 	}
 
 

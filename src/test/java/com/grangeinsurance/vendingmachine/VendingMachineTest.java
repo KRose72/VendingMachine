@@ -95,22 +95,36 @@ class VendingMachineTest {
 		insertQuarter();
 		selectChips();
 		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Chips");
 	}
 	
-	@Test
-	void displayThankYouWhenItemThreeIsSelectedAndTwoQuartersOneDimeOneNickel() {
-		insertQuarter();
-		insertQuarter();
-		insertDime();
-		insertNickel();
-		selectCandy();
-		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
-	}
-	
+//	@Test
+//	void displayThankYouWhenItemThreeIsSelectedAndTwoQuartersOneDimeOneNickel() {
+//		insertQuarter();
+//		insertQuarter();
+//		insertDime();
+//		insertNickel();
+//		selectCandy();
+//		//assertThat(machine.machineDisplay()).isEqualTo("$0.65");
+//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+//		//assertThat(machine.dispenseTray()).isEqualTo("Candy");
+//	}
+
 	@Test
 	void displaysInsertCoinsWhenGumISSelected() {
 		selectGum();
 		assertThat(machine.machineDisplay()).isEqualTo("INSERT COIN");
+	}
+	
+	@Test
+	void displaysQuarterwhenThreeQuartersAreInsertedAndChipsAreSelected() {
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectChips();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Chips");
+		assertThat(machine.coinReturn()).isEqualTo("Quarter");
 	}
 	
 	private void insertQuarter() {
