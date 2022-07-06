@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class VendingMachineTest {
-
 	private VendingMachine machine;
 	
 	@BeforeEach

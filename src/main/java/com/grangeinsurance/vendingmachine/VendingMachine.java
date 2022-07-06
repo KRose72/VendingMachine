@@ -28,7 +28,6 @@ public class VendingMachine {
 	acceptedCoins.put("Nickel", 0.05f);
 	}
 	
-	
 	private static HashMap<String, Float> availableItems = new HashMap<>();
 	static {
 	availableItems.put("Cola", 1.00f);
