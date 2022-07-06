@@ -115,15 +115,28 @@ class VendingMachineTest {
 		assertThat(machine.machineDisplay()).isEqualTo("INSERT COIN");
 	}
 	
+//	@Test
+//	void displaysQuarterwhenThreeQuartersAreInsertedAndChipsAreSelected() {
+//		insertQuarter();
+//		insertQuarter();
+//		insertQuarter();
+//		selectChips();
+//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+//		assertThat(machine.dispenseTray()).isEqualTo("Chips");
+//		assertThat(machine.coinReturn()).isEqualTo("Quarter");
+//	}
+	
 	@Test
-	void displaysQuarterwhenThreeQuartersAreInsertedAndChipsAreSelected() {
+	void displays2QuarterDimeWhenFourQuartersOneDimeAreInsertedAndChipsAreSelected() {
 		insertQuarter();
 		insertQuarter();
 		insertQuarter();
+		insertQuarter();
+		insertDime();
 		selectChips();
 		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
 		assertThat(machine.dispenseTray()).isEqualTo("Chips");
-		assertThat(machine.coinReturn()).isEqualTo("Quarter");
+		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Dime");
 	}
 	
 	private void insertQuarter() {

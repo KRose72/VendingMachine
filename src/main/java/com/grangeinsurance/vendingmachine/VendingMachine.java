@@ -23,9 +23,9 @@ public class VendingMachine {
 	
 	private static HashMap<String, Float> acceptedCoins = new HashMap<>();
 	static {
-	acceptedCoins.put("Quarter", 0.25f);
-	acceptedCoins.put("Dime", 0.10f);
 	acceptedCoins.put("Nickel", 0.05f);
+	acceptedCoins.put("Dime", 0.10f);
+	acceptedCoins.put("Quarter", 0.25f);
 	}
 	
 	private static HashMap<String, Float> availableItems = new HashMap<>();
@@ -92,13 +92,17 @@ public class VendingMachine {
 	}
 
 	public void makeChange(float total) {
-		while (total != 0) {
-			for (Entry<String, Float> entry: acceptedCoins.entrySet()) {
-				if (total >= entry.getValue()) {
-					total -= entry.getValue();
-					returnedCoins.add(entry.getKey());
-				}
-			}
+		while (total >= 0.25) {
+			total -= acceptedCoins.get("Quarter");
+			returnedCoins.add("Quarter");
+		}
+		while (total >= 0.10) {
+			total -= acceptedCoins.get("Dime");
+			returnedCoins.add("Dime");
+		}
+		while (total >= 0.05) {
+			total -= acceptedCoins.get("Nickel");
+			returnedCoins.add("Nickel");
 		}
 	}
 
