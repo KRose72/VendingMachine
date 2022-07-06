@@ -93,9 +93,11 @@ public class VendingMachine {
 
 	public void makeChange(float total) {
 		while (total != 0) {
-			if (total >= acceptedCoins.get("Quarter")) {
-				total -= acceptedCoins.get("Quarter");
-				returnedCoins.add("Quarter");
+			for (Entry<String, Float> entry: acceptedCoins.entrySet()) {
+				if (total >= entry.getValue()) {
+					total -= entry.getValue();
+					returnedCoins.add(entry.getKey());
+				}
 			}
 		}
 	}
