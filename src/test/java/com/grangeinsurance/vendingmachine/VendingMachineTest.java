@@ -115,16 +115,16 @@ class VendingMachineTest {
 		assertThat(machine.machineDisplay()).isEqualTo("INSERT COIN");
 	}
 	
-//	@Test
-//	void displaysQuarterwhenThreeQuartersAreInsertedAndChipsAreSelected() {
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		selectChips();
-//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
-//		assertThat(machine.dispenseTray()).isEqualTo("Chips");
-//		assertThat(machine.coinReturn()).isEqualTo("Quarter");
-//	}
+	@Test
+	void displaysQuarterwhenThreeQuartersAreInsertedAndChipsAreSelected() {
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectChips();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Chips");
+		assertThat(machine.coinReturn()).isEqualTo("Quarter");
+	}
 	
 	@Test
 	void displays2QuarterDimeWhenFourQuartersOneDimeAreInsertedAndChipsAreSelected() {
@@ -137,6 +137,18 @@ class VendingMachineTest {
 		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
 		assertThat(machine.dispenseTray()).isEqualTo("Chips");
 		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Dime");
+	}
+	
+	@Test
+	void display3QuartersOneNickelWhenReturnCoinsButtonIsHit () {
+		insertQuarter();
+		insertQuarter();
+		insertDime();
+		insertDime();
+		insertDime();
+		selectReturnCoins();
+		assertThat(machine.machineDisplay()).isEqualTo("INSERT COIN");
+		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Quarter, Nickel");
 	}
 	
 	private void insertQuarter() {
@@ -166,5 +178,9 @@ class VendingMachineTest {
 	
 	private void selectGum() {
 		machine.makeSelection("Gum");
+	}
+	
+	private void selectReturnCoins() {
+		machine.makeSelection("Return Coins");
 	}
 }

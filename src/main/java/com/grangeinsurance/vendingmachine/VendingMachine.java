@@ -35,25 +35,25 @@ public class VendingMachine {
 	availableItems.put("Candy", 0.65f);
 	}
 	public Object machineDisplay() {
-		if (currentTotal > 0 && "".equals(itemSelected)) {
+		
+		if (currentTotal > 0.0 && !availableItems.containsKey(itemSelected)) {
 			return String.format(priceFormat, currentTotal);
-		} 
-		else if (priceOfItem > currentTotal && !"".equals(itemSelected)) 
+		}
+		else if (priceOfItem > currentTotal && availableItems.containsKey(itemSelected)) 
 		{
 			return "PRICE " + String.format(priceFormat, priceOfItem);
 		} 
-		else if (priceOfItem == currentTotal && !"".equals(itemSelected)) 
+		else if (priceOfItem == currentTotal && availableItems.containsKey(itemSelected)) 
 		{
-			currentTotal = 0;
 			itemsInTray.add(itemSelected);
 			return "THANK YOU";
 		} 
-		else if (priceOfItem < currentTotal && !"".equals(itemSelected)) 
+		else if (priceOfItem < currentTotal && availableItems.containsKey(itemSelected)) 
 		{
 			currentTotal -= priceOfItem;
 			itemsInTray.add(itemSelected);
-			if (currentTotal > 0) {
-				makeChange(currentTotal);
+			if (currentTotal > 0.0) {
+				makeChange();
 			}
 			return "THANK YOU";
 		}
@@ -87,23 +87,26 @@ public class VendingMachine {
 		if (availableItems.containsKey(item)) {
 			priceOfItem = availableItems.get(item);
 			itemSelected = item;
+		} else if ("Return Coins".equals(item)) {
+			makeChange();
 		}
 		
 	}
 
-	public void makeChange(float total) {
-		while (total >= 0.25) {
-			total -= acceptedCoins.get("Quarter");
+	public void makeChange() {
+		while (currentTotal >= 0.25) {
+			currentTotal -= 0.25;
 			returnedCoins.add("Quarter");
 		}
-		while (total >= 0.10) {
-			total -= acceptedCoins.get("Dime");
+		while (currentTotal >= 0.10) {
+			currentTotal -= 0.10;
 			returnedCoins.add("Dime");
 		}
-		while (total >= 0.05) {
-			total -= acceptedCoins.get("Nickel");
+		while (currentTotal >= 0.05) {
+			currentTotal -= 0.05;
 			returnedCoins.add("Nickel");
 		}
+		currentTotal = 0;
 	}
 
 
