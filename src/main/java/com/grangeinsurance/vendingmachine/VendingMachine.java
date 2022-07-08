@@ -14,6 +14,28 @@ public class VendingMachine {
 	String itemSelected = "";
 	String priceFormat = "$%.2f";
 	
+	static Coin quarter = new Coin("Quarter", 0.25f, 50);
+	static Coin dime = new Coin("Dime", 0.10f, 50);
+	static Coin nickel = new Coin("Nickel", 0.05f, 50);
+	
+	static Product cola = new Product("Cola", 1.00f, 5);
+	static Product chips = new Product("Chips", 0.50f, 5);
+	static Product candy = new Product("Candy", 0.65f, 5);
+	
+	private static HashMap<Coin, Float> acceptedCoins = new HashMap<>();
+	static {
+	acceptedCoins.put(nickel, nickel.getValue());
+	acceptedCoins.put(dime, dime.getValue());
+	acceptedCoins.put(quarter, quarter.getValue());
+	}
+	
+	private static HashMap<String, Float> availableItems = new HashMap<>();
+	static {
+	availableItems.put(cola.getName(), cola.getPrice());
+	availableItems.put(chips.getName(), chips.getPrice());
+	availableItems.put(candy.getName(), candy.getPrice());
+	}
+	
 	private static HashMap<String, Float> rejectedCoins = new HashMap<>();
 	static {
 	rejectedCoins.put("Penny", 0.01f);
@@ -21,19 +43,6 @@ public class VendingMachine {
 	rejectedCoins.put("Silver Dollar", 1.00f);
 	}
 	
-	private static HashMap<String, Float> acceptedCoins = new HashMap<>();
-	static {
-	acceptedCoins.put("Nickel", 0.05f);
-	acceptedCoins.put("Dime", 0.10f);
-	acceptedCoins.put("Quarter", 0.25f);
-	}
-	
-	private static HashMap<String, Float> availableItems = new HashMap<>();
-	static {
-	availableItems.put("Cola", 1.00f);
-	availableItems.put("Chips", 0.50f);
-	availableItems.put("Candy", 0.65f);
-	}
 	public Object machineDisplay() {
 		
 		if (currentTotal > 0.0 && !availableItems.containsKey(itemSelected)) {
@@ -94,17 +103,17 @@ public class VendingMachine {
 	}
 
 	public void makeChange() {
-		while (currentTotal >= 0.25) {
-			currentTotal -= 0.25;
-			returnedCoins.add("Quarter");
+		while (currentTotal >= quarter.getValue()) {
+			currentTotal -= quarter.getValue();
+			returnedCoins.add(quarter.getName());
 		}
-		while (currentTotal >= 0.10) {
-			currentTotal -= 0.10;
-			returnedCoins.add("Dime");
+		while (currentTotal >= dime.getValue()) {
+			currentTotal -= dime.getValue();
+			returnedCoins.add(dime.getName());
 		}
-		while (currentTotal >= 0.05) {
-			currentTotal -= 0.05;
-			returnedCoins.add("Nickel");
+		while (currentTotal >= nickel.getValue()) {
+			currentTotal -= nickel.getValue();
+			returnedCoins.add(nickel.getName());
 		}
 		currentTotal = 0;
 	}
