@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 public class VendingMachine {
 
@@ -99,8 +100,6 @@ public class VendingMachine {
 
 	public void makeSelection(String item) {
 		if (availableItems.containsKey(item)) {
-			//priceOfItem = availableItems.get(item);
-			//itemSelected = item;
 			getProductInfo(item);
 		} else if ("Return Coins".equals(item)) {
 			makeChange();
@@ -109,15 +108,15 @@ public class VendingMachine {
 	}
 
 	private void getProductInfo(String item) {
-		if (cola.getName() == item) {
+		if (Objects.equals(cola.getName(), item)) {
 			priceOfItem = cola.getPrice();
 			currentStock = cola.getStock();
 			itemSelected = cola.getName();
-		} else if (chips.getName() == item) {
+		} else if (Objects.equals(chips.getName(), item)) {
 			priceOfItem = chips.getPrice();
 			currentStock = chips.getStock();
 			itemSelected = chips.getName();
-		} else if (candy.getName() == item) {
+		} else if (Objects.equals(candy.getName(), item)) {
 			priceOfItem = candy.getPrice();
 			currentStock = candy.getStock();
 			itemSelected = candy.getName();
