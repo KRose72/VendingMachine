@@ -11,6 +11,7 @@ public class VendingMachine {
 	List<String> itemsInTray = new ArrayList<>();
 	float currentTotal = 0;
 	float priceOfItem = 0;
+	int currentStock = 0;
 	String itemSelected = "";
 	String priceFormat = "$%.2f";
 	
@@ -18,8 +19,8 @@ public class VendingMachine {
 	static Coin dime = new Coin("Dime", 0.10f, 50);
 	static Coin nickel = new Coin("Nickel", 0.05f, 50);
 	
-	static Product cola = new Product("Cola", 1.00f, 5);
-	static Product chips = new Product("Chips", 0.50f, 5);
+	static Product cola = new Product("Cola", 1.00f, 1);
+	static Product chips = new Product("Chips", 0.50f, 3);
 	static Product candy = new Product("Candy", 0.65f, 5);
 	
 	private static HashMap<Coin, Float> acceptedCoins = new HashMap<>();
@@ -52,9 +53,13 @@ public class VendingMachine {
 		{
 			return "PRICE " + String.format(priceFormat, priceOfItem);
 		} 
+		else if (currentStock == 0 && availableItems.containsKey(itemSelected)) {
+			return "SOLD OUT";
+		}
 		else if (priceOfItem == currentTotal && availableItems.containsKey(itemSelected)) 
 		{
 			itemsInTray.add(itemSelected);
+			cola.setStock(currentStock - 1);
 			return "THANK YOU";
 		} 
 		else if (priceOfItem < currentTotal && availableItems.containsKey(itemSelected)) 
@@ -94,10 +99,28 @@ public class VendingMachine {
 
 	public void makeSelection(String item) {
 		if (availableItems.containsKey(item)) {
-			priceOfItem = availableItems.get(item);
-			itemSelected = item;
+			//priceOfItem = availableItems.get(item);
+			//itemSelected = item;
+			getProductInfo(item);
 		} else if ("Return Coins".equals(item)) {
 			makeChange();
+		}
+		
+	}
+
+	private void getProductInfo(String item) {
+		if (cola.getName() == item) {
+			priceOfItem = cola.getPrice();
+			currentStock = cola.getStock();
+			itemSelected = cola.getName();
+		} else if (chips.getName() == item) {
+			priceOfItem = chips.getPrice();
+			currentStock = chips.getStock();
+			itemSelected = chips.getName();
+		} else if (candy.getName() == item) {
+			priceOfItem = candy.getPrice();
+			currentStock = candy.getStock();
+			itemSelected = candy.getName();
 		}
 		
 	}

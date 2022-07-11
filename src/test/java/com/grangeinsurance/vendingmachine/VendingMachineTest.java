@@ -97,17 +97,16 @@ class VendingMachineTest {
 		assertThat(machine.dispenseTray()).isEqualTo("Chips");
 	}
 	
-//	@Test
-//	void displayThankYouWhenItemThreeIsSelectedAndTwoQuartersOneDimeOneNickel() {
-//		insertQuarter();
-//		insertQuarter();
-//		insertDime();
-//		insertNickel();
-//		selectCandy();
-//		//assertThat(machine.machineDisplay()).isEqualTo("$0.65");
-//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
-//		//assertThat(machine.dispenseTray()).isEqualTo("Candy");
-//	}
+	@Test
+	void displayThankYouWhenItemThreeIsSelectedAndTwoQuartersOneDimeOneNickel() {
+		insertQuarter();
+		insertQuarter();
+		insertDime();
+		insertNickel();
+		selectCandy();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Candy");
+	}
 
 	@Test
 	void displaysInsertCoinsWhenGumISSelected() {
@@ -149,6 +148,18 @@ class VendingMachineTest {
 		selectReturnCoins();
 		assertThat(machine.machineDisplay()).isEqualTo("INSERT COIN");
 		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Quarter, Nickel");
+	}
+	
+	@Test
+	void displayOutOfStockWhen2ColaAreBought () {
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectCola();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		selectCola();
+		assertThat(machine.machineDisplay()).isEqualTo("SOLD OUT");
 	}
 	
 	private void insertQuarter() {
