@@ -21,8 +21,8 @@ public class VendingMachine {
 	static Coin nickel = new Coin("Nickel", 0.05f, 50);
 	
 	static Product cola = new Product("Cola", 1.00f, 1);
-	static Product chips = new Product("Chips", 0.50f, 3);
-	static Product candy = new Product("Candy", 0.65f, 5);
+	static Product chips = new Product("Chips", 0.50f, 2);
+	static Product candy = new Product("Candy", 0.65f, 1);
 	
 	private static HashMap<Coin, Float> acceptedCoins = new HashMap<>();
 	static {
@@ -60,7 +60,7 @@ public class VendingMachine {
 		else if (priceOfItem == currentTotal && availableItems.containsKey(itemSelected)) 
 		{
 			itemsInTray.add(itemSelected);
-			cola.setStock(currentStock - 1);
+			updateStock(itemSelected);
 			return "THANK YOU";
 		} 
 		else if (priceOfItem < currentTotal && availableItems.containsKey(itemSelected)) 
@@ -122,6 +122,16 @@ public class VendingMachine {
 			itemSelected = candy.getName();
 		}
 		
+	}
+	 
+	private void updateStock (String item) {
+		if (Objects.equals(cola.getName(), item)) {
+			cola.setStock(currentStock - 1);
+		} else if (Objects.equals(chips.getName(), item)) {
+			chips.setStock(currentStock - 1);
+		} else if (Objects.equals(candy.getName(), item)) {
+			candy.setStock(currentStock - 1);
+		}
 	}
 
 	public void makeChange() {

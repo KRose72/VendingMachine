@@ -157,9 +157,56 @@ class VendingMachineTest {
 		insertQuarter();
 		insertQuarter();
 		selectCola();
-		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
 		selectCola();
 		assertThat(machine.machineDisplay()).isEqualTo("SOLD OUT");
+	}
+	
+	void displayOutOfStockWhen2ColaAreBoughtAndEightQuartersEntered () {
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectCola();
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectCola();
+		assertThat(machine.machineDisplay()).isEqualTo("SOLD OUT");
+		selectReturnCoins();
+		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Quarter, Quarter");
+	}
+		
+	void displayOutOfStockWhen3ChipsAreBoughtAndEightQuartersEntered () {
+		insertQuarter();
+		insertQuarter();
+		selectChips();
+		insertQuarter();
+		insertQuarter();
+		selectChips();
+		insertQuarter();
+		insertQuarter();
+		selectChips();
+		insertQuarter();
+		insertQuarter();
+		selectChips();
+		assertThat(machine.machineDisplay()).isEqualTo("SOLD OUT");
+		selectReturnCoins();
+		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter");
+	}
+	
+	void displayOutOfStockWhen2CandyAreBoughtAndSixQuartersEntered () {
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectCandy();
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectCandy();
+		assertThat(machine.machineDisplay()).isEqualTo("SOLD OUT");
+		selectReturnCoins();
+		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Quarter");
 	}
 	
 	private void insertQuarter() {
