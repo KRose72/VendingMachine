@@ -88,25 +88,25 @@ class VendingMachineTest {
 		assertThat(machine.dispenseTray()).isEqualTo("Cola");
 	}
 	
-//	@Test
-//	void displayThankYouWhenItemTwoIsSelectedAndTwoQuarters() {
-//		insertQuarter();
-//		insertQuarter();
-//		selectChips();
-//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
-//		assertThat(machine.dispenseTray()).isEqualTo("Chips");
-//	}
+	@Test
+	void displayThankYouWhenItemTwoIsSelectedAndTwoQuarters() {
+		insertQuarter();
+		insertQuarter();
+		selectChips();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Chips");
+	}
 	
-//	@Test
-//	void displayThankYouWhenItemThreeIsSelectedAndTwoQuartersOneDimeOneNickel() {
-//		insertQuarter();
-//		insertQuarter();
-//		insertDime();
-//		insertNickel();
-//		selectCandy();
-//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
-//		assertThat(machine.dispenseTray()).isEqualTo("Candy");
-//	}
+	@Test
+	void displayThankYouWhenItemThreeIsSelectedAndTwoQuartersOneDimeOneNickel() {
+		insertQuarter();
+		insertQuarter();
+		insertDime();
+		insertNickel();
+		selectCandy();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Candy");
+	}
 
 	@Test
 	void displaysInsertCoinsWhenGumISSelected() {
@@ -114,29 +114,29 @@ class VendingMachineTest {
 		assertThat(machine.machineDisplay()).isEqualTo("INSERT COIN");
 	}
 	
-//	@Test
-//	void displaysQuarterwhenThreeQuartersAreInsertedAndChipsAreSelected() {
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		selectChips();
-//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
-//		assertThat(machine.dispenseTray()).isEqualTo("Chips");
-//		assertThat(machine.coinReturn()).isEqualTo("Quarter");
-//	}
+	@Test
+	void displaysQuarterwhenThreeQuartersAreInsertedAndChipsAreSelected() {
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectChips();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Chips");
+		assertThat(machine.coinReturn()).isEqualTo("Quarter");
+	}
 	
-//	@Test
-//	void displays2QuarterDimeWhenFourQuartersOneDimeAreInsertedAndChipsAreSelected() {
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		insertDime();
-//		selectChips();
-//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
-//		assertThat(machine.dispenseTray()).isEqualTo("Chips");
-//		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Dime");
-//	}
+	@Test
+	void displays2QuarterDimeWhenFourQuartersOneDimeAreInsertedAndChipsAreSelected() {
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		insertDime();
+		selectChips();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Chips");
+		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Dime");
+	}
 	
 	@Test
 	void display3QuartersOneNickelWhenReturnCoinsButtonIsHit () {
@@ -150,37 +150,37 @@ class VendingMachineTest {
 		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Quarter, Nickel");
 	}
 	
-//	@Test
-//	void displayOutOfStockWhen2ColaAreBought () {
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		selectCola();
-//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
-//		assertThat(machine.dispenseTray()).isEqualTo("Cola");
-//		selectCola();
-//		assertThat(machine.machineDisplay()).isEqualTo("SOLD OUT");
-//	}
-//	
-//	@Test
-//	void displayOutOfStockWhen2ColaAreBoughtAndEightQuartersEntered () {
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		selectCola();
-//		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
-//		assertThat(machine.dispenseTray()).isEqualTo("Cola");
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		insertQuarter();
-//		selectCola();
-//		assertThat(machine.machineDisplay()).isEqualTo("SOLD OUT");
-//		selectReturnCoins();
-//		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Quarter, Quarter");
-//	}
+	@Test
+	void displayOutOfStockWhen2ColaAreBought () {
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectCola();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Cola");
+		selectCola();
+		assertThat(machine.machineDisplay()).isEqualTo("SOLD OUT");
+	}
+	
+	@Test
+	void displayOutOfStockWhen2ColaAreBoughtAndEightQuartersEntered () {
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectCola();
+		assertThat(machine.machineDisplay()).isEqualTo("THANK YOU");
+		assertThat(machine.dispenseTray()).isEqualTo("Cola");
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		insertQuarter();
+		selectCola();
+		assertThat(machine.machineDisplay()).isEqualTo("SOLD OUT");
+		selectReturnCoins();
+		assertThat(machine.coinReturn()).isEqualTo("Quarter, Quarter, Quarter, Quarter");
+	}
 	
 	@Test
 	void displayOutOfStockWhen3ChipsAreBoughtAndSixQuartersEntered () {

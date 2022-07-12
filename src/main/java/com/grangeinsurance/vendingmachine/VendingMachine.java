@@ -20,9 +20,9 @@ public class VendingMachine {
 	static Coin dime = new Coin("Dime", 0.10f, 50);
 	static Coin nickel = new Coin("Nickel", 0.05f, 50);
 	
-	static Product cola = new Product("Cola", 1.00f, 1);
-	static Product chips = new Product("Chips", 0.50f, 2);
-	static Product candy = new Product("Candy", 0.65f, 1);
+	Product cola = new Product("Cola", 1.00f, 1);
+	Product chips = new Product("Chips", 0.50f, 2);
+	Product candy = new Product("Candy", 0.65f, 1);
 	
 	private static HashMap<Coin, Float> acceptedCoins = new HashMap<>();
 	static {
@@ -33,9 +33,9 @@ public class VendingMachine {
 	
 	private static HashMap<String, Float> availableItems = new HashMap<>();
 	static {
-	availableItems.put(cola.getName(), cola.getPrice());
-	availableItems.put(chips.getName(), chips.getPrice());
-	availableItems.put(candy.getName(), candy.getPrice());
+	availableItems.put("Cola", 1.00f);
+	availableItems.put("Chips", 0.50f);
+	availableItems.put("Candy", 0.65f);
 	}
 	
 	private static HashMap<String, Float> rejectedCoins = new HashMap<>();
@@ -46,16 +46,17 @@ public class VendingMachine {
 	}
 	
 	public Object machineDisplay() {
-		//System.out.println(currentTotal);
+		System.out.println(chips.getStock());
 		if (currentTotal > 0.0 && !availableItems.containsKey(itemSelected)) {
 			return String.format(priceFormat, currentTotal);
+		}
+		else if (currentStock == 0 && availableItems.containsKey(itemSelected)) 
+		{
+			return "SOLD OUT";
 		}
 		else if (priceOfItem > currentTotal && availableItems.containsKey(itemSelected)) 
 		{
 			return "PRICE " + String.format(priceFormat, priceOfItem);
-		} 
-		else if (currentStock == 0 && availableItems.containsKey(itemSelected)) {
-			return "SOLD OUT";
 		}
 		else if (priceOfItem == currentTotal && availableItems.containsKey(itemSelected)) 
 		{
