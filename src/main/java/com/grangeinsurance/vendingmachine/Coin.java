@@ -22,4 +22,7 @@ public class Coin {
 	public int getAvailable() {
 		return available;
 	}
+	
+	public void setAvailable(int newAvailable) {
+		this.available = newAvailable;	}
 }

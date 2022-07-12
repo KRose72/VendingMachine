@@ -46,7 +46,7 @@ public class VendingMachine {
 	}
 	
 	public Object machineDisplay() {
-		
+		//System.out.println(currentTotal);
 		if (currentTotal > 0.0 && !availableItems.containsKey(itemSelected)) {
 			return String.format(priceFormat, currentTotal);
 		}
@@ -61,12 +61,14 @@ public class VendingMachine {
 		{
 			itemsInTray.add(itemSelected);
 			updateStock(itemSelected);
+			currentTotal = 0;
 			return "THANK YOU";
 		} 
 		else if (priceOfItem < currentTotal && availableItems.containsKey(itemSelected)) 
 		{
 			currentTotal -= priceOfItem;
 			itemsInTray.add(itemSelected);
+			updateStock(itemSelected);
 			if (currentTotal > 0.0) {
 				makeChange();
 			}
@@ -89,6 +91,7 @@ public class VendingMachine {
 	public void insertCoin (float total) {
 		if (acceptedCoins.containsValue(total)) {
 			currentTotal += total;
+			updateCoinsAvailable(total);
 		} else {
 			for (Entry<String, Float> entry: rejectedCoins.entrySet()) {
 				if (entry.getValue() == total) {
@@ -96,6 +99,17 @@ public class VendingMachine {
 				}
 			}
 		}
+	}
+
+	private void updateCoinsAvailable(float total) {
+		if (total == quarter.getValue()) {
+			quarter.setAvailable(quarter.available + 1);
+		} else if (total == dime.getValue()) {
+			dime.setAvailable(dime.available + 1);
+		} else if (total == nickel.getValue()) {
+			nickel.setAvailable(nickel.available + 1);
+		}
+		
 	}
 
 	public void makeSelection(String item) {
@@ -136,14 +150,17 @@ public class VendingMachine {
 
 	public void makeChange() {
 		while (currentTotal >= quarter.getValue()) {
+			quarter.setAvailable(quarter.available - 1);
 			currentTotal -= quarter.getValue();
 			returnedCoins.add(quarter.getName());
 		}
 		while (currentTotal >= dime.getValue()) {
+			dime.setAvailable(dime.available - 1);
 			currentTotal -= dime.getValue();
 			returnedCoins.add(dime.getName());
 		}
 		while (currentTotal >= nickel.getValue()) {
+			nickel.setAvailable(nickel.available - 1);
 			currentTotal -= nickel.getValue();
 			returnedCoins.add(nickel.getName());
 		}
